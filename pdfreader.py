@@ -6,7 +6,7 @@ import fitz
 
 
 class RenderPdf:
-    img_object_li = []
+    pdf_converted_img = []
 
     def view_pdf(self, master, width=1200, height=600, pdf_location="", bar=True, load="after"):
 
@@ -46,7 +46,7 @@ class RenderPdf:
                     pix = page.get_pixmap(matrix=mat)  # And then you need to comment this! Rest; remains the same...
                     imgdata = pix.tobytes("ppm")
                     tkimg = PhotoImage(data=imgdata)
-                    self.img_object_li.append(tkimg)
+                    self.pdf_converted_img.append(tkimg)
                     if bar is True and load == "after":
                         initial_percentage += 1
                         percentage_view = (initial_percentage / len(doc)) * 100
@@ -57,7 +57,7 @@ class RenderPdf:
                     show_loading_bar.pack_forget()
                     display_msg.pack_forget()
 
-                for i in self.img_object_li:
+                for i in self.pdf_converted_img:
                     text.image_create(END, image=i)
                     text.insert(END, "\n\n")
                 text.configure(state="disabled")
